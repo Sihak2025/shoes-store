@@ -1,12 +1,14 @@
 import Footer from "../layout/Footer"
 import Header from "../layout/Header"
+import Home from "../pages/Home"
+import AppRoute from "../routes/AppRoute"
 const App = () => {
   return (
     <div>
       <Header/>
-      <Footer />
+      <AppRoute />
     </div>
   )
 }
 
-export default App
+export default App;
