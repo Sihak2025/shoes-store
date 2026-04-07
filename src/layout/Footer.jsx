@@ -2,8 +2,8 @@ import { AiFillSound } from "react-icons/ai";
 import { FaEarthAmericas } from "react-icons/fa6";
 import { MdOutlineVideoLibrary } from "react-icons/md";
 import { IoLogoYoutube } from "react-icons/io";
-import { FaFacebook, FaGoogle, FaTiktok } from "react-icons/fa";
-
+import { FaFacebook,FaTiktok } from "react-icons/fa";
+import { BsGoogle } from "react-icons/bs";
 const Footer = () => {
   return (
     <footer className="w-full bg-black mt-10">
@@ -86,7 +86,7 @@ const Footer = () => {
           {[
             { icon: <IoLogoYoutube />, color: "bg-red-600" },
             { icon: <FaFacebook />, color: "bg-blue-700" },
-            { icon: <FaGoogle />, color: "bg-white " },
+            { icon: <BsGoogle />, color: "bg-gray-800" },
             { icon: <FaTiktok />, color: "bg-gray-800" },
           ].map((item, index) => (
             <div
