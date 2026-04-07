@@ -1,5 +1,5 @@
 import React from "react";
-import {Ticket,Heart,Clock,Settings,CreditCard,Film,ChevronRight,
+import {Ticket,Heart,Settings,CreditCard,Film,ChevronRight,
 } from "lucide-react";
 
 const Profile = () => {
