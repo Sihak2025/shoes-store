@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GrFormNext } from "react-icons/gr";
 import { IoChevronBackOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Actors = () => {
   const [actors, setActors] = useState([]);
@@ -13,7 +14,7 @@ const Actors = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}&page=${page}`
+          `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}&page=${page}`,
         );
         const data = await res.json();
         setActors(data.results || []);
@@ -37,60 +38,65 @@ const Actors = () => {
           Popular Actors
         </h1>
         <div className="w-20 h-[5px] bg-blue-600 mt-2 mb-10 mx-auto md:mx-0 rounded-full"></div>
-
-        {/* Grid Layout */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {loading ? (
             <div className="col-span-full h-40 flex items-center justify-center">
-               <p className="text-xl font-bold animate-bounce text-blue-600">Loading Stars...</p>
+              <p className="text-xl font-bold animate-bounce text-blue-600">
+                Loading Stars...
+              </p>
             </div>
           ) : (
             actors.map((actor) => (
-              <div key={actor.id} className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                <div className="h-[280px] w-full overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                    src={actor.profile_path 
-                      ? `https://image.tmdb.org/t/p/w500${actor.profile_path}` 
-                      : "https://via.placeholder.com/500x750?text=No+Image"}
-                    alt={actor.name}
-                  />
-                </div>
-                <div className="p-4 text-center">
-                  <h2 className="font-bold text-lg text-gray-800 truncate">{actor.name}</h2>
-                  <p className="text-blue-600 text-sm font-semibold mt-1">
-                    {actor.known_for_department}
-                  </p>
-                  <div className="mt-3 text-[10px] text-gray-400 uppercase tracking-tighter">
-                    Famous for: {actor.known_for?.[0]?.title || actor.known_for?.[0]?.name || "N/A"}
+              <Link key={actor.id} to={`/details/actor/${actor.id}`}>
+                <div className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                  <div className="h-[280px] w-full overflow-hidden">
+                    <img
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                      src={
+                        actor.profile_path
+                          ? `https://image.tmdb.org/t/p/w500${actor.profile_path}`
+                          : "https://via.placeholder.com/500x750?text=No+Image"
+                      }
+                      alt={actor.name}
+                    />
+                  </div>
+                  <div className="p-4 text-center">
+                    <h2 className="font-bold text-lg text-gray-800 truncate">
+                      {actor.name}
+                    </h2>
+                    <p className="text-blue-600 text-sm font-semibold mt-1">
+                      {actor.known_for_department}
+                    </p>
+                    <div className="mt-3 text-[10px] text-gray-400 uppercase tracking-tighter">
+                      Famous for:{" "}
+                      {actor.known_for?.[0]?.title ||
+                        actor.known_for?.[0]?.name ||
+                        "N/A"}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))
           )}
         </div>
       </div>
-
-      {/* Pagination */}
       <div className="w-full flex items-center justify-between mt-10">
         <button
           onClick={handleBack}
           disabled={page === 1}
           className={`flex items-center gap-1 px-6 py-3 bg-white text-gray-800 rounded-xl font-bold border-2 border-gray-300 transition-all ${
-            page === 1 ? "opacity-20 cursor-not-allowed" : "hover:bg-blue-600 hover:text-white hover:border-blue-600 active:scale-95"
-          }`}
-        >
+            page === 1
+              ? "opacity-20 cursor-not-allowed"
+              : "hover:bg-blue-600 hover:text-white hover:border-blue-600 active:scale-95"
+          }`}>
           <IoChevronBackOutline size={20} /> Prev
         </button>
-
         <span className="text-white font-black text-xl italic underline decoration-blue-500 underline-offset-8">
           PAGE {page}
         </span>
-
         <button
           onClick={handleNext}
-          className="flex items-center gap-1 px-6 py-3 bg-white text-gray-800 rounded-xl font-bold border-2 border-gray-300 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all active:scale-95"
-        >
+          className="flex items-center gap-1 px-6 py-3 bg-white text-gray-800 rounded-xl font-bold border-2 border-gray-300 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all active:scale-95">
           Next <GrFormNext size={20} />
         </button>
       </div>

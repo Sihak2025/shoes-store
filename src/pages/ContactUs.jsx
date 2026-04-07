@@ -18,7 +18,6 @@ const ContactUs = () => {
         <h2 className="text-3xl font-bold text-black mb-6">
           Send Us a Message
         </h2>
-
         <form ref={form} onSubmit={submit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -33,7 +32,6 @@ const ContactUs = () => {
                 className="mt-1 w-full rounded-lg border px-4 py-2"
               />
             </div>
-
             <div>
               <label className="text-sm font-medium">
                 Email Address *
@@ -47,7 +45,6 @@ const ContactUs = () => {
               />
             </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium">
@@ -60,7 +57,6 @@ const ContactUs = () => {
                 className="mt-1 w-full rounded-lg border px-4 py-2"
               />
             </div>
-
             <div>
               <label className="text-sm font-medium">
                 Subject *
@@ -74,7 +70,6 @@ const ContactUs = () => {
               />
             </div>
           </div>
-
           <div>
             <label className="text-sm font-medium">
               Message *
@@ -87,7 +82,6 @@ const ContactUs = () => {
               className="mt-1 w-full rounded-lg border px-4 py-2"
             ></textarea>
           </div>
-
           <button
             type="submit"
             className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-blue-500 text-white font-medium py-3 rounded-lg shadow-md hover:opacity-90 transition cursor-pointer"

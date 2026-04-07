@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import CardMovie from "../components/CardMovie"; // យើងប្រើ Component Card រួមគ្នាបាន
 import { GrFormNext } from "react-icons/gr";
 import { IoChevronBackOutline } from "react-icons/io5";
-
+import { Link } from "react-router-dom";
 const TvShows = () => {
   const [tvShows, setTvShows] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,15 +13,12 @@ const TvShows = () => {
     const fetchTvShows = async () => {
       setLoading(true);
       try {
-        // ប្តូរ URL ទៅកាន់ tv/popular វិញ
         const res = await fetch(
           `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&page=${page}`
         );
         const data = await res.json();
         setTvShows(data.results || []);
         setLoading(false);
-        
-        // រុញ Screen ទៅលើវិញពេលប្តូរទំព័រ
         window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (error) {
         console.error("Error fetching TV shows:", error);
@@ -45,10 +42,7 @@ const TvShows = () => {
             Page {page}
           </span>
         </div>
-        
         <div className="w-full h-[3px] bg-blue-600 mt-4 mb-10 opacity-30"></div>
-
-        {/* Grid បង្ហាញ ៥ Card ក្នុងមួយជួរ */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {loading ? (
             <div className="col-span-full h-60 flex items-center justify-center">
@@ -56,26 +50,25 @@ const TvShows = () => {
             </div>
           ) : (
             tvShows.map((tv) => (
-              <CardMovie
-                key={tv.id}
-                id={tv.id}
-                // ចំណាំ៖ TV Show ប្រើឈ្មោះ 'name' មិនមែន 'title' ទេ
-                title={tv.name || "No Name"} 
-                img={
-                  tv.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${tv.poster_path}`
-                    : "https://via.placeholder.com/500x750?text=No+Poster"
-                }
-                rating={tv.vote_average || 0}
-                views={Math.round(tv.popularity) || 0}
-                des={tv.overview || "No description available."}
-              />
+              <Link to={`/details/tv/${tv.id}`}>
+                <CardMovie
+                  key={tv.id}
+                  id={tv.id}
+                  title={tv.name || "No Name"} 
+                  img={
+                    tv.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${tv.poster_path}`
+                      : "https://via.placeholder.com/500x750?text=No+Poster"
+                  }
+                  rating={tv.vote_average || 0}
+                  views={Math.round(tv.popularity) || 0}
+                  des={tv.overview || "No description available."}
+                />
+              </Link>
             ))
           )}
         </div>
       </div>
-
-      {/* Pagination Controls */}
       <div className="w-full flex items-center justify-between mt-10 px-2">
         <button
           onClick={handleBack}
@@ -87,11 +80,9 @@ const TvShows = () => {
           <IoChevronBackOutline size={24} className="group-hover:-translate-x-1 transition-transform" />
           Back
         </button>
-
         <div className="hidden sm:block">
           <p className="text-gray-400 font-medium">Viewing page {page} of popular series</p>
         </div>
-
         <button
           onClick={handleNext}
           className="group flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-500 active:scale-95 transition-all shadow-lg shadow-blue-900/40"
