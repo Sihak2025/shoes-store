@@ -49,14 +49,12 @@ const Details = () => {
           alt={movie.title}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-
         <button
           onClick={() => navigate(-1)}
           className="absolute top-10 left-10 p-3 bg-white/10 backdrop-blur-md rounded-full hover:bg-white/20 transition-all cursor-pointer">
           <FaArrowLeft size={20} />
         </button>
       </div>
-
       <div className="max-w-6xl mx-auto px-6 -mt-40 relative z-10">
         <div className="flex flex-col md:flex-row gap-10">
           <div className="w-full md:w-[350px] shrink-0">

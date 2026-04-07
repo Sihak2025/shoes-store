@@ -1,7 +1,6 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import { IoMdEye } from "react-icons/io";
-import { Link } from "react-router-dom";
 
 const CardMovie = ({ id, img, title, rating, views, des }) => {
   return (

@@ -10,12 +10,10 @@ const Header = () => {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
-
-    // បើមានអក្សរ ឱ្យវាទៅទំព័រ search ភ្លាមៗ
     if (value.trim().length > 0) {
       navigate(`/search?q=${value}`);
     } else {
-      navigate("/"); // បើលុបអស់ ឱ្យមកទំព័រដើមវិញ
+      navigate("/"); 
     }
   };
 
@@ -53,9 +51,7 @@ const Header = () => {
             </ul>
           </nav>
         </div>
-
         <div className="flex items-center gap-6">
-          {/* Live Search Input */}
           <div className="flex items-center bg-gray-900 border border-gray-700 rounded-full px-4 py-1.5 focus-within:border-red-600 transition-all duration-300">
             <FaSearch className="text-gray-500 text-sm mr-2" />
             <input
